@@ -44,4 +44,15 @@ public class ProductMapper {
 
     }
 
+    // Update mapper
+    public static void updateEntity(Product product, ProductRequestDTO dto) {
+        product.setName(dto.getName());
+        product.setDescription(dto.getDescription());
+        product.setPrice(dto.getPrice());
+        product.setCategory(dto.getCategory());
+        product.setImageUrl(dto.getImageUrl());
+        product.setStatus(dto.getStatus());
+        product.setUpdatedAt(Instant.now());
+    }
+
 }

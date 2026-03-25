@@ -1,7 +1,7 @@
 package com.bestbuy.product.Model.Enum;
 
 public enum ProductCategory {
-    ELECTRONIC,
+    ELECTRONICS,
     CLOTHING,
     KITCHEN_AND_APPLIANCE,
     SPORTS,
