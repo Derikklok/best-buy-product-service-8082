@@ -4,6 +4,8 @@ import com.bestbuy.product.Dto.Product.ProductRequestDTO;
 import com.bestbuy.product.Dto.Product.ProductResponseDTO;
 import com.bestbuy.product.Exception.ProductNotFoundException;
 import com.bestbuy.product.Mapper.ProductMapper;
+import com.bestbuy.product.Model.Enum.ProductCategory;
+import com.bestbuy.product.Model.Enum.ProductStatus;
 import com.bestbuy.product.Model.Product;
 import com.bestbuy.product.Repository.ProductRepository;
 import com.bestbuy.product.Service.Interfaces.IProductService;
@@ -68,5 +70,21 @@ public class ProductService implements IProductService {
             throw new ProductNotFoundException(id);
         }
         repository.deleteById(id);
+    }
+
+    @Override
+    public List<ProductResponseDTO> findByCategory(ProductCategory category) {
+        return repository.findByCategory(category)
+                .stream()
+                .map(ProductMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProductResponseDTO> findByStatus(ProductStatus status) {
+        return repository.findByStatus(status)
+                .stream()
+                .map(ProductMapper::toDto)
+                .collect(Collectors.toList());
     }
 }

@@ -2,6 +2,8 @@ package com.bestbuy.product.Controller;
 
 import com.bestbuy.product.Dto.Product.ProductRequestDTO;
 import com.bestbuy.product.Dto.Product.ProductResponseDTO;
+import com.bestbuy.product.Model.Enum.ProductCategory;
+import com.bestbuy.product.Model.Enum.ProductStatus;
 import com.bestbuy.product.Service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -44,17 +46,33 @@ public class ProductController {
     @PutMapping("/{id}")
     public ResponseEntity<ProductResponseDTO> updateProduct(
             @PathVariable String id,
-            @Valid @RequestBody ProductRequestDTO dto){
-        return ResponseEntity.ok(productService.updateProduct(id,dto));
+            @Valid @RequestBody ProductRequestDTO dto) {
+        return ResponseEntity.ok(productService.updateProduct(id, dto));
     }
 
     // ========== DELETE (DELETE /api/products/{id}) ==========
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(
             @PathVariable String id
-    ){
+    ) {
         productService.deleteProduct(id);
 
         return ResponseEntity.noContent().build();
+    }
+
+    // ========== SEARCH BY CATEGORY (GET /api/products/category/{category}) ==========
+    @GetMapping("/category/{category}")
+    public ResponseEntity<List<ProductResponseDTO>> getByCategory(
+            @PathVariable ProductCategory category
+    ) {
+        return ResponseEntity.ok(productService.findByCategory(category));
+    }
+
+    // ========== SEARCH BY STATUS (GET /api/products/status/{status}) ==========
+    @GetMapping("/status/{status}")
+    public ResponseEntity<List<ProductResponseDTO>> getByStatus(
+            @PathVariable ProductStatus status
+    ) {
+        return ResponseEntity.ok(productService.findByStatus(status));
     }
 }

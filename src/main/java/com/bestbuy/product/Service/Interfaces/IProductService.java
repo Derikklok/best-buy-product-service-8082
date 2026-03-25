@@ -2,6 +2,8 @@ package com.bestbuy.product.Service.Interfaces;
 
 import com.bestbuy.product.Dto.Product.ProductRequestDTO;
 import com.bestbuy.product.Dto.Product.ProductResponseDTO;
+import com.bestbuy.product.Model.Enum.ProductCategory;
+import com.bestbuy.product.Model.Enum.ProductStatus;
 
 import java.util.List;
 
@@ -20,4 +22,10 @@ public interface IProductService {
 
     //    DELETE - Remove product
     void deleteProduct(String id);
+
+    //    GET - Search or find by category, Filtering
+    List<ProductResponseDTO> findByCategory(ProductCategory category);
+
+    //    GET - Filter by status
+    List<ProductResponseDTO> findByStatus(ProductStatus status);
 }
